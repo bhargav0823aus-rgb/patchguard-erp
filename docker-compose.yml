@@ -1,0 +1,46 @@
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_USER: patchguard
+      POSTGRES_PASSWORD: patchguard
+      POSTGRES_DB: patchguard
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U patchguard"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks: [patchnet]
+
+  agent:
+    build:
+      context: ./apps/agent
+      dockerfile: Dockerfile.agent
+    env_file: ./apps/agent/.env
+    ports:
+      - "8765:8765"
+    networks: [patchnet]
+
+  worker:
+    build:
+      context: ./apps/agent
+      dockerfile: Dockerfile.worker
+    env_file: ./apps/agent/.env
+    environment:
+      AGENT_BASE: http://agent:8765
+    depends_on: [agent]
+    networks: [patchnet]
+    # Earth rendering needs a real GPU for best results; CPU fallback works for smoke tests.
+    # Mount /dev/shm bigger to avoid Chrome shm-out-of-space crashes.
+    shm_size: "1gb"
+
+volumes:
+  pgdata:
+
+networks:
+  patchnet:
+    driver: bridge
