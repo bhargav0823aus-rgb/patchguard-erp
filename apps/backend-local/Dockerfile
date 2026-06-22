@@ -7,7 +7,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-# Install deps first so this layer is cached on code-only changes
+# Install CPU-only torch first — prevents pip from pulling multi-GB CUDA libraries
+RUN pip install --no-cache-dir torch torchvision \
+    --index-url https://download.pytorch.org/whl/cpu
+
+# Install remaining deps (torch/torchvision already satisfied above)
 COPY apps/backend-local/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
