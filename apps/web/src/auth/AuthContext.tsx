@@ -40,6 +40,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   return <Ctx.Provider value={{ user, login, logout, hasRole }}>{children}</Ctx.Provider>
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth(): AuthState {
   const ctx = useContext(Ctx)
   if (!ctx) throw new Error('useAuth outside AuthProvider')

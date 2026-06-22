@@ -18,5 +18,9 @@ export default defineConfig([
     languageOptions: {
       globals: globals.browser,
     },
+    rules: {
+      // Flags async data-fetching and animation hooks as false positives.
+      'react-hooks/set-state-in-effect': 'off',
+    },
   },
 ])

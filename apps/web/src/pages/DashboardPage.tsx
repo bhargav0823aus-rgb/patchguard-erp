@@ -396,7 +396,6 @@ export function DashboardPage() {
     } finally {
       setReportBusy(false)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const progressPct = job.totalWaypoints
