@@ -17,7 +17,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # YOLOv5 source — cloned at build time, not copied from the repo
 # Install its requirements too (excluding torch/torchvision already installed above)
-RUN git clone --depth 1 --branch v7.0 \
+RUN git clone --depth 1 \
     https://github.com/ultralytics/yolov5 /app/yolov5 && \
     grep -vE '^(torch|torchvision)' /app/yolov5/requirements.txt | \
     pip install --no-cache-dir -r /dev/stdin
