@@ -2,10 +2,11 @@ FROM python:3.12-slim
 
 WORKDIR /app
 COPY apps/agent/pyproject.toml ./
-RUN pip install --no-cache-dir uv && uv pip install --system -e .
+COPY apps/agent/README.md ./
 COPY apps/agent/agent ./agent
 COPY apps/agent/api ./api
 COPY apps/agent/conftest.py ./
+RUN pip install --no-cache-dir uv && uv pip install --system .
 
 ENV AGENT_HOST=0.0.0.0 AGENT_PORT=8765
 EXPOSE 8765
