@@ -2,7 +2,7 @@ FROM python:3.12-slim
 
 # libglib2.0-0 required by opencv-python-headless; git for yolov5 clone
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libglib2.0-0 libsm6 libxrender1 libxext6 git wget \
+    libglib2.0-0 libgl1 libsm6 libxrender1 libxext6 git wget \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
