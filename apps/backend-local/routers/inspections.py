@@ -289,7 +289,11 @@ async def damage_report(
     return [
         {
             "image_id": img.id,
-            "annotated_image_url": f"{base}/api/v1/images/{img.id}/annotated",
+            "annotated_image_url": (
+                img.annotated_path
+                if img.annotated_path and img.annotated_path.startswith("http")
+                else f"{base}/api/v1/images/{img.id}/annotated"
+            ),
             "latitude": img.lat,
             "longitude": img.lng,
             "captured_at": img.captured_at,
