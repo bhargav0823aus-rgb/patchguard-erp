@@ -69,6 +69,21 @@ services:
       - key: ANTHROPIC_API_KEY
         scope: RUN_TIME
         type: SECRET
+      - key: SPACES_KEY
+        scope: RUN_TIME
+        type: SECRET
+      - key: SPACES_SECRET
+        scope: RUN_TIME
+        type: SECRET
+      - key: SPACES_BUCKET
+        scope: RUN_TIME
+        type: SECRET           # e.g. patchguard-images
+      - key: SPACES_REGION
+        scope: RUN_TIME
+        value: syd1            # update if your Space is in a different region
+      - key: SPACES_CDN_ENDPOINT
+        scope: RUN_TIME
+        type: SECRET           # optional: set to CDN endpoint to serve images from edge
 
   - name: agent
     source_dir: /
