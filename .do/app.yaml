@@ -122,10 +122,3 @@ workers:
         scope: RUN_TIME
         value: "true"
 
-databases:
-  - name: patchguard-db
-    engine: PG
-    version: "16"
-    size: db-s-1vcpu-1gb        # ~$15/mo — run `CREATE EXTENSION postgis;` after first provision
-    num_nodes: 1
-    production: false           # set to true for a standby replica in production
