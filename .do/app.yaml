@@ -71,7 +71,7 @@ services:
         type: SECRET
 
   - name: agent
-    source_dir: apps/agent
+    source_dir: /
     dockerfile_path: apps/agent/Dockerfile.agent
     github:
       repo: llravelo/patchguard-erp
@@ -100,7 +100,7 @@ workers:
   # Capture worker — handles autonomous Street View / satellite inspection.
   # Comment out this block if you don't need the autonomous inspection feature.
   - name: worker
-    source_dir: apps/agent
+    source_dir: /
     dockerfile_path: apps/agent/Dockerfile.worker
     github:
       repo: llravelo/patchguard-erp

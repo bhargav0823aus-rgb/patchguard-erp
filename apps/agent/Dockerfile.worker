@@ -9,10 +9,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     wget xdg-utils && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app/worker
-COPY worker/package.json ./
+COPY apps/agent/worker/package.json ./
 RUN npm install
-COPY worker/tsconfig.json ./
-COPY worker/src ./src
+COPY apps/agent/worker/tsconfig.json ./
+COPY apps/agent/worker/src ./src
 
 ENV WORKER_HEADLESS=true
 CMD ["npm", "run", "start"]

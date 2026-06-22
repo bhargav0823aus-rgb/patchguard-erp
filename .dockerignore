@@ -4,5 +4,4 @@
 **/node_modules
 **/.env
 apps/web
-apps/agent
 yolov5/
